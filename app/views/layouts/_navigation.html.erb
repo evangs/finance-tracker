@@ -6,27 +6,29 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-            Account
-          </a>
-          <div class="dropdown-menu">
-            <% if user_signed_in? %>
-              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-            <% else %>
-              <%= link_to 'Log in', new_user_session_path, class: "dropdown-item" %>
-            <% end %>
-          </div>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <% if user_signed_in? %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+              <%= current_user.full_name %>
+            </a>
+              <div class="dropdown-menu">
+                <%= link_to my_portfolio_path, class: "dropdown-item" do %>
+                  <%= fa_icon 'line-chart' %> Portfolio
+                <% end %>
+                <%= link_to my_friends_path, class: "dropdown-item" do %>
+                  <%= fa_icon 'users' %> Friends
+                <% end %>
+                <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+                  <%= fa_icon 'edit' %> Edit profile
+                <% end %>
+                <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                  <%= fa_icon 'sign-out' %> Log out
+                <% end %>
+              </div>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </div>
 </nav>

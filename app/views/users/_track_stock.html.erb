@@ -1,0 +1,12 @@
+<% if current_user.can_track_stock?(stock.ticker) %>
+  <%= link_to (fa_icon 'plus'), user_stocks_path(user: current_user, ticker: stock.ticker), class: 'btn btn-xs btn-outline-primary', method: :post %>
+<% else %>
+  <span class="badge badge-secondary">
+    You are already tracking
+    <% if current_user.stock_already_tracked?(stock.ticker) %>
+      this stock
+    <% else %>
+      10 stocks
+    <% end %>
+  </span>
+<% end %>

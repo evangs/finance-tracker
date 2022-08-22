@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-9">
+    <% if label %>
+      <h3><%= label %></h3>
+    <% end %>
+    <table class="table table-borderless table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Stocks</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% friends.each do |friend| %>
+          <tr>
+            <th scope="row"><%= friend.full_name %></th>
+            <td><%= friend.stock_list %></td>
+            <td>
+              <%= link_to (fa_icon 'user'), user_path(friend), class: 'btn btn-xs btn-outline-primary' %>
+              <% if current_user.id == @user.id %>
+                <%= link_to (fa_icon 'remove'), friendship_path(friend),
+                  method: :delete, 
+                  data: {confirm: 'Are you sure?'}, 
+                  class: 'btn btn-small btn-outline-danger' %>
+              <% else %>
+                <% if current_user.can_add_friend?(@user.id) %>
+                  <%= link_to (fa_icon 'plus'), friendships_path(friend: friend), class: 'btn btn-xs btn-outline-primary', method: :post %>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

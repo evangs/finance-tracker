@@ -1,0 +1,21 @@
+<div class="results-block">
+  <%= render 'layouts/alerts' %>
+</div>
+<% if @users && @users.count > 0 %>
+  <div class="card card-header results-block">
+    <table class="table table-borderless table-hover">
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <th scope="row"><strong>Email: </strong> <%= user.email %></th>
+            <td><strong>Name: </strong> <%= user.full_name %></td>
+            <td>
+              <%= link_to (fa_icon 'user'), user_path(user), class: 'btn btn-xs btn-outline-primary' %>
+              <%= link_to (fa_icon 'plus'), friendships_path(friend: user), class: 'btn btn-xs btn-outline-primary', method: :post %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
