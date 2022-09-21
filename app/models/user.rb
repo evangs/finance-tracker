@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :stocks, through: :user_stocks
   has_many :friendships
   has_many :friends, through: :friendships
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
   def stock_already_tracked?(ticker_symbol)
